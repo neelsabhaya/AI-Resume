@@ -45,5 +45,6 @@
       "memory": 3008,
       "maxDuration": 60
     }
-  }
+  },
+  "_comment": "Note: maxDuration of 60 seconds requires Vercel Pro plan. Hobby plan is limited to 10 seconds. See DEPLOYMENT.md for details."
 }

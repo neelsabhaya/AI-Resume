@@ -32,7 +32,8 @@ if IS_SERVERLESS:
     DATABASE_URL = os.getenv("DATABASE_URL", "")
     if not DATABASE_URL:
         # Fallback warning - app will fail if database operations are attempted
-        print("WARNING: DATABASE_URL not set in serverless environment. Database operations will fail.")
+        import logging
+        logging.warning("DATABASE_URL not set in serverless environment. Database operations will fail.")
         DATABASE_URL = "sqlite+aiosqlite:///./resume_ai.db"
 else:
     DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./resume_ai.db")
