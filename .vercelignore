@@ -1,0 +1,54 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Sample data and uploads
+sample_data/
+uploads/
+*.db
+*.db-journal
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation build artifacts
+docs/_build/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Large model files (will be downloaded on build)
+*.model
+*.bin
+*.pth
+
+# Logs
+*.log
+
+# Environment files (secrets should be in Vercel env vars)
+.env
+.env.local

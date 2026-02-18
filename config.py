@@ -10,13 +10,33 @@ load_dotenv()
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = BASE_DIR / os.getenv("UPLOAD_DIR", "uploads")
-UPLOAD_DIR.mkdir(exist_ok=True)
+# Only create directories if not in serverless environment (Vercel)
+# In serverless, use /tmp for temporary storage
+IS_SERVERLESS = os.getenv("VERCEL", "false").lower() == "true"
+if not IS_SERVERLESS:
+    UPLOAD_DIR.mkdir(exist_ok=True)
+else:
+    # Use /tmp in serverless environment (only for temporary storage)
+    UPLOAD_DIR = Path("/tmp/uploads")
+    UPLOAD_DIR.mkdir(exist_ok=True)
 
 SAMPLE_DATA_DIR = BASE_DIR / "sample_data"
-SAMPLE_DATA_DIR.mkdir(exist_ok=True)
+if not IS_SERVERLESS:
+    SAMPLE_DATA_DIR.mkdir(exist_ok=True)
 
 # ── Database ───────────────────────────────────────────────────────────────────
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./resume_ai.db")
+# Default to SQLite for local development, but strongly recommend PostgreSQL for production
+# Serverless environments (Vercel) MUST use external database like PostgreSQL
+if IS_SERVERLESS:
+    # In serverless, require DATABASE_URL to be set (no SQLite default)
+    DATABASE_URL = os.getenv("DATABASE_URL", "")
+    if not DATABASE_URL:
+        # Fallback warning - app will fail if database operations are attempted
+        import logging
+        logging.warning("DATABASE_URL not set in serverless environment. Database operations will fail.")
+        DATABASE_URL = "sqlite+aiosqlite:///./resume_ai.db"
+else:
+    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./resume_ai.db")
 
 # ── AI / NLP ───────────────────────────────────────────────────────────────────
 SPACY_MODEL = "en_core_web_sm"
