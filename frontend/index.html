@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Screening System | Smart ATS</title>
+  <meta name="description" content="AI-powered ATS that parses, analyzes, and ranks resumes against job descriptions using NLP and semantic matching." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">🧠</div>
+        <div>
+          <div class="logo-title">AI Resume Screener</div>
+          <div class="logo-sub">Smart ATS · Powered by NLP & Transformers</div>
+        </div>
+      </div>
+      <nav class="nav-pills">
+        <button class="nav-pill active" onclick="showSection('upload')">Upload</button>
+        <button class="nav-pill" onclick="showSection('results')">Results</button>
+        <button class="nav-pill" onclick="showSection('compare')">Compare</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ── UPLOAD SECTION ── -->
+    <section id="section-upload" class="section active">
+      <div class="section-header">
+        <h1>Screen Resumes with AI</h1>
+        <p>Upload a job description and candidate resumes. Our AI will parse, analyze, and rank them instantly.</p>
+      </div>
+
+      <div class="upload-grid">
+        <!-- JD Card -->
+        <div class="card" id="jd-card">
+          <div class="card-header">
+            <span class="card-icon">📋</span>
+            <div>
+              <div class="card-title">Job Description</div>
+              <div class="card-sub">Paste or type the full JD</div>
+            </div>
+          </div>
+          <input id="jd-title" class="input-field" type="text" placeholder="Job Title (e.g. Senior Python Developer)" />
+          <textarea id="jd-text" class="textarea-field" placeholder="Paste the full job description here...
+
+Example:
+We are looking for a Python Developer with 3+ years of experience in FastAPI, PostgreSQL, and machine learning. The candidate should have a Bachelor's degree in Computer Science and experience with Docker and AWS..."></textarea>
+          <div class="char-count" id="jd-char-count">0 characters</div>
+          <button class="btn btn-primary" id="upload-jd-btn" onclick="uploadJD()">
+            <span class="btn-icon">⚡</span> Upload Job Description
+          </button>
+          <div class="status-badge" id="jd-status" style="display:none"></div>
+        </div>
+
+        <!-- Resume Upload Card -->
+        <div class="card" id="resume-card">
+          <div class="card-header">
+            <span class="card-icon">📄</span>
+            <div>
+              <div class="card-title">Candidate Resumes</div>
+              <div class="card-sub">PDF, DOCX, or TXT files</div>
+            </div>
+          </div>
+
+          <div class="drop-zone" id="drop-zone" onclick="document.getElementById('resume-files').click()">
+            <div class="drop-icon">📁</div>
+            <div class="drop-text">Drag & drop resumes here</div>
+            <div class="drop-sub">or click to browse · PDF, DOCX, TXT · Max 10MB each</div>
+            <input type="file" id="resume-files" multiple accept=".pdf,.docx,.doc,.txt" style="display:none" onchange="handleFileSelect(event)" />
+          </div>
+
+          <div id="file-list" class="file-list"></div>
+
+          <button class="btn btn-success" id="analyze-btn" onclick="analyzeResumes()" disabled>
+            <span class="btn-icon">🔍</span> Analyze Resumes
+          </button>
+          <div class="status-badge" id="analyze-status" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="stats-bar" id="stats-bar" style="display:none">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-label">Total Candidates</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value green" id="stat-shortlisted">0</div>
+          <div class="stat-label">Shortlisted (≥60%)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value yellow" id="stat-avg">0%</div>
+          <div class="stat-label">Average Score</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value red" id="stat-flagged">0</div>
+          <div class="stat-label">Flagged Resumes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value blue" id="stat-time">0s</div>
+          <div class="stat-label">Processing Time</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RESULTS SECTION ── -->
+    <section id="section-results" class="section">
+      <div class="section-header">
+        <h1>Ranked Candidates</h1>
+        <p>Candidates are ranked by AI score. Click any row to view detailed analysis and feedback.</p>
+      </div>
+
+      <div class="toolbar">
+        <input class="search-input" id="search-input" type="text" placeholder="🔍 Search by name or skill..." oninput="filterTable()" />
+        <select class="filter-select" id="grade-filter" onchange="filterTable()">
+          <option value="">All Grades</option>
+          <option value="A">Grade A (80%+)</option>
+          <option value="B">Grade B (65–79%)</option>
+          <option value="C">Grade C (50–64%)</option>
+          <option value="D">Grade D (35–49%)</option>
+          <option value="F">Grade F (&lt;35%)</option>
+        </select>
+        <button class="btn btn-outline" onclick="downloadCSV()">⬇ Export CSV</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="results-table" id="results-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Candidate</th>
+              <th>Score</th>
+              <th>Grade</th>
+              <th>Skills Match</th>
+              <th>Experience</th>
+              <th>Education</th>
+              <th>Fraud Risk</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="results-body">
+            <tr><td colspan="9" class="empty-state">No results yet. Upload and analyze resumes first.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── COMPARE SECTION ── -->
+    <section id="section-compare" class="section">
+      <div class="section-header">
+        <h1>Candidate Comparison</h1>
+        <p>Select candidates from the results to compare them side-by-side.</p>
+      </div>
+      <div id="compare-container" class="compare-grid">
+        <div class="empty-state-card">
+          <div style="font-size:3rem">⚖️</div>
+          <div>Select candidates from the Results tab to compare them here.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── CANDIDATE DETAIL MODAL ── -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ── LOADING OVERLAY ── -->
+  <div class="loading-overlay" id="loading-overlay" style="display:none">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <div class="loading-title">AI is analyzing resumes...</div>
+      <div class="loading-sub" id="loading-sub">Parsing documents · Extracting features · Computing similarity</div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
