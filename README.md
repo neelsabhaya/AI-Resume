@@ -144,3 +144,38 @@ Edit `config.py` to adjust:
 - **AI model** (`SENTENCE_TRANSFORMER_MODEL`)
 - **Semantic blend ratio** (`SEMANTIC_BLEND`)
 - **Fraud detection thresholds**
+
+---
+
+## 🚢 Deployment
+
+### Deploy to Vercel (Serverless)
+
+This application is configured for easy deployment to Vercel:
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel
+
+# Deploy to production
+vercel --prod
+```
+
+**Important:** You must configure a PostgreSQL database for production. See [`DEPLOYMENT.md`](DEPLOYMENT.md) for complete instructions including:
+- Step-by-step deployment guide (CLI and Dashboard methods)
+- Database setup (PostgreSQL required)
+- Environment variables configuration
+- Serverless limitations and workarounds
+- Performance optimization tips
+- Troubleshooting guide
+
+### Alternative Deployment Options
+
+- **Docker**: Use Docker for containerized deployment on any platform
+- **Traditional VPS**: Deploy on AWS EC2, DigitalOcean, or similar
+- **Platform-as-a-Service**: Railway, Render, Fly.io, Google Cloud Run
+
+See [`DEPLOYMENT.md`](DEPLOYMENT.md) for detailed guidance on all deployment options.
