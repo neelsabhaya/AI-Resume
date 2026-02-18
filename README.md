@@ -2,6 +2,8 @@
 
 > **Smart ATS** — Automatically parse, analyze, rank, and score resumes against a job description using NLP and AI.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/neelsabhaya/AI-Resume)
+
 ---
 
 ## 🚀 Quick Start
@@ -149,33 +151,49 @@ Edit `config.py` to adjust:
 
 ## 🚢 Deployment
 
-### Deploy to Vercel (Serverless)
+### 🚀 Quick Deploy to Vercel (2 minutes!)
 
-This application is configured for easy deployment to Vercel:
+This application is fully configured for Vercel deployment. Click the button to deploy:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/neelsabhaya/AI-Resume)
+
+**Quick Steps:**
+1. Click "Deploy with Vercel" button above
+2. Import the repository
+3. Add environment variables:
+   - `DATABASE_URL` (PostgreSQL connection string - **required**)
+   - `DEBUG=false` (recommended for production)
+4. Click "Deploy"
+5. Done! 🎉
+
+📖 **See [`QUICKSTART_DEPLOY.md`](QUICKSTART_DEPLOY.md)** for the complete quick deployment guide with screenshots.
+
+### Alternative: CLI Deployment
 
 ```bash
 # Install Vercel CLI
 npm install -g vercel
 
-# Deploy
-vercel
-
 # Deploy to production
 vercel --prod
 ```
 
-**Important:** You must configure a PostgreSQL database for production. See [`DEPLOYMENT.md`](DEPLOYMENT.md) for complete instructions including:
-- Step-by-step deployment guide (CLI and Dashboard methods)
-- Database setup (PostgreSQL required)
-- Environment variables configuration
-- Serverless limitations and workarounds
-- Performance optimization tips
-- Troubleshooting guide
+### 📚 Detailed Documentation
 
-### Alternative Deployment Options
+- **[`QUICKSTART_DEPLOY.md`](QUICKSTART_DEPLOY.md)** - Quick 2-minute deployment guide
+- **[`DEPLOYMENT.md`](DEPLOYMENT.md)** - Comprehensive guide including:
+  - Step-by-step deployment (CLI and Dashboard methods)
+  - Database setup (PostgreSQL required)
+  - Environment variables configuration
+  - Serverless limitations and workarounds
+  - Performance optimization tips
+  - Troubleshooting guide
+  - Alternative deployment options (Docker, VPS, Cloud Run, etc.)
 
-- **Docker**: Use Docker for containerized deployment on any platform
-- **Traditional VPS**: Deploy on AWS EC2, DigitalOcean, or similar
+### Other Deployment Options
+
+- **Docker**: Containerized deployment on any platform
+- **Traditional VPS**: AWS EC2, DigitalOcean, Linode
 - **Platform-as-a-Service**: Railway, Render, Fly.io, Google Cloud Run
 
 See [`DEPLOYMENT.md`](DEPLOYMENT.md) for detailed guidance on all deployment options.
