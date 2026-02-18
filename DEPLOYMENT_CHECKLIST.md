@@ -143,6 +143,6 @@ After successful deployment:
 
 Your AI Resume Screening System is now live on Vercel!
 
-**Deployment URL**: `https://__________.vercel.app` (fill in your URL)
+**Deployment URL**: `https://your-app-name.vercel.app` (replace with your actual URL)
 
 Share feedback or issues at: [GitHub Issues](https://github.com/neelsabhaya/AI-Resume/issues)

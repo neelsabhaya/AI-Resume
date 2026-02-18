@@ -2,7 +2,7 @@
 
 Your repository is already configured for Vercel! Follow these steps to deploy in minutes.
 
-> 📋 **Want a detailed checklist?** See [`DEPLOYMENT_CHECKLIST.md`](./DEPLOYMENT_CHECKLIST.md)
+> 📋 **Want a detailed checklist?** See [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md)
 
 ## ⚡ Fastest Method: Deploy via Vercel Dashboard
 
@@ -123,7 +123,7 @@ After deployment:
 
 ## 📚 Need More Details?
 
-See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for:
+See [DEPLOYMENT.md](DEPLOYMENT.md) for:
 - Comprehensive deployment guide
 - Performance optimization tips
 - Serverless limitations and workarounds
