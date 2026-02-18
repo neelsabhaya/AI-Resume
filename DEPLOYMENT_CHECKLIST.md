@@ -4,12 +4,14 @@ Use this checklist to ensure your deployment is successful.
 
 ## Pre-Deployment Verification ✓
 
-- [x] `vercel.json` configuration file exists
-- [x] `.vercelignore` file configured to exclude unnecessary files
-- [x] `api/index.py` serverless function handler created
-- [x] `requirements.txt` includes all dependencies (including `mangum`)
-- [x] Frontend files exist in `frontend/` directory
-- [x] Documentation created (`DEPLOYMENT.md`, `QUICKSTART_DEPLOY.md`)
+These files should already exist in the repository. Verify they're present:
+
+- [ ] `vercel.json` configuration file exists
+- [ ] `.vercelignore` file configured to exclude unnecessary files
+- [ ] `api/index.py` serverless function handler created
+- [ ] `requirements.txt` includes all dependencies (including `mangum`)
+- [ ] Frontend files exist in `frontend/` directory
+- [ ] Documentation created (`DEPLOYMENT.md`, `QUICKSTART_DEPLOY.md`)
 
 ## Database Setup (Required)
 

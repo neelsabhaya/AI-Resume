@@ -162,7 +162,7 @@ This application is fully configured for Vercel deployment. Click the button to 
 2. Import the repository
 3. Add environment variables:
    - `DATABASE_URL` (PostgreSQL connection string - **required**)
-   - `DEBUG=false`
+   - `DEBUG=false` (recommended for production)
 4. Click "Deploy"
 5. Done! 🎉
 

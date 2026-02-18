@@ -30,9 +30,11 @@ Your repository is already configured for Vercel! Follow these steps to deploy i
    | Variable | Value | Required |
    |----------|-------|----------|
    | `DATABASE_URL` | `postgresql://user:pass@host:5432/db?sslmode=require` | ✅ YES |
-   | `DEBUG` | `false` | ✅ YES |
+   | `DEBUG` | `false` | ⚠️ Recommended |
    
-   > ⚠️ **Important:** You MUST use PostgreSQL (not SQLite) for Vercel deployment. See database setup below.
+   > ⚠️ **Important:** 
+   > - `DATABASE_URL` is **required** - You MUST use PostgreSQL for Vercel deployment (SQLite doesn't work in serverless)
+   > - `DEBUG` should be set to `false` for production (defaults to `true` if not set)
 
 5. **Click "Deploy"** and wait 2-3 minutes
 
