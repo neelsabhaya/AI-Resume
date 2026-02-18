@@ -2,6 +2,8 @@
 
 Your repository is already configured for Vercel! Follow these steps to deploy in minutes.
 
+> 📋 **Want a detailed checklist?** See [`DEPLOYMENT_CHECKLIST.md`](./DEPLOYMENT_CHECKLIST.md)
+
 ## ⚡ Fastest Method: Deploy via Vercel Dashboard
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/neelsabhaya/AI-Resume)
