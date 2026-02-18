@@ -6,26 +6,68 @@
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+### 0. Requirements
+
+- Python **3.10–3.13** (3.11 is recommended)
+- Git (if you are cloning from GitHub)
+
+> Note: Some optional NLP features (spaCy, sentence-transformers) may
+> require extra build tools on newer Python versions. The core app
+> (parsing, scoring, dashboard) works without them.
+
+### 1. Clone & create virtual environment
 
 ```bash
-pip install -r requirements.txt
-python -m spacy download en_core_web_sm
+git clone https://github.com/your-username/AI-Resume.git
+cd AI-Resume
+
+# Windows (PowerShell)
+python -m venv .venv
+./.venv/Scripts/Activate.ps1
+
+# Windows (cmd)
+:: python -m venv .venv
+:: .\.venv\Scripts\activate
 ```
 
-### 2. Generate Sample Data
+### 2. Install Python dependencies
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# (Optional, only if you want spaCy-based NLP and it installs cleanly)
+# python -m spacy download en_core_web_sm
+```
+
+### 3. (Optional) Install OCR engine for scanned PDFs
+
+PDFs that are **images only** (scanned resumes) can be read via OCR.
+For that to work you need the Tesseract engine installed at the
+system level:
+
+- Official Tesseract project site: https://tesseract-ocr.github.io/
+- Official source and docs: https://github.com/tesseract-ocr/tesseract
+
+If you skip this step, text-based PDFs and DOCX/TXT resumes will still
+work, but scanned PDFs may return "no text extracted".
+
+### 4. Generate sample data (optional)
 
 ```bash
 python generate_samples.py
 ```
 
-### 3. Run the Server
+This will create a demo job description and a few example resumes in
+`sample_data/` so you can try the system quickly.
+
+### 5. Run the Server
 
 ```bash
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
 ```
 
-### 4. Open the Dashboard
+### 6. Open the Dashboard
 
 - **Recruiter Dashboard**: http://localhost:8000
 - **API Documentation**: http://localhost:8000/docs
@@ -102,9 +144,3 @@ Edit `config.py` to adjust:
 - **AI model** (`SENTENCE_TRANSFORMER_MODEL`)
 - **Semantic blend ratio** (`SEMANTIC_BLEND`)
 - **Fraud detection thresholds**
-
----
-
-## 🏆 Resume Line
-
-> _Built an AI-powered Resume Screening System using Python, FastAPI, NLP (spaCy, BERT), and ML to automatically parse, analyze, and rank resumes against job descriptions with semantic similarity scoring, improving screening efficiency by 80%._
